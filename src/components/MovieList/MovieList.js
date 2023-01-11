@@ -1,22 +1,16 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getTrendingMovies } from '../../services/movieApi';
+import { List } from './MovieList.styled';
 
-export const MovieList = () => {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    getTrendingMovies().then(({ results }) => setMovies(results));
-  });
+export const MovieList = ({ items }) => {
   return (
-    <ul>
-      {movies.map(({ id, title }) => (
+    <List>
+      {items.map(({ id, title }) => (
         <li key={id}>
-          <Link to={`${id}`}>
+          <Link to={`/movies/${id}`}>
             <p>{title}</p>
           </Link>
         </li>
       ))}
-    </ul>
+    </List>
   );
 };

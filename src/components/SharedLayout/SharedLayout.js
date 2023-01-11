@@ -1,22 +1,25 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { TbHome, TbMovie } from 'react-icons/tb';
+import { WrapperBox, Box, Navigation, NavItem } from './SharedLayout.styled';
 
 export const SharedLayout = () => {
   return (
-    <div>
+    <WrapperBox>
       <header>
-        <nav>
-          <Link to="/">
-            <TbHome size={16} />
-            <span>Home</span>
-          </Link>
-          <Link to="movies">
-            <TbMovie size={16} />
-            <span>Movies</span>
-          </Link>
-        </nav>
+        <Box>
+          <Navigation>
+            <NavItem to="/">
+              <TbHome size={24} />
+              <span>Home</span>
+            </NavItem>
+            <NavItem to="movies">
+              <TbMovie size={24} />
+              <span>Movies</span>
+            </NavItem>
+          </Navigation>
+        </Box>
       </header>
       <Outlet />
-    </div>
+    </WrapperBox>
   );
 };

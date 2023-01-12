@@ -13,7 +13,7 @@ import {
   Button,
 } from './Movies.styled';
 
-export const Movies = () => {
+const Movies = () => {
   const [query, setQuery] = useState('');
   const [queryString, setQueryString] = useState('');
   const [movies, setMovies] = useState([]);
@@ -24,7 +24,14 @@ export const Movies = () => {
     if (!query) {
       return;
     }
-    getMovieByQuery(query).then(({ results }) => setMovies(results));
+
+    getMovieByQuery(query).then(({ results }) => {
+      if (!results.length) {
+        alert(`No result containing ${query} were found.`);
+        return;
+      }
+      setMovies(results);
+    });
   }, [query]);
 
   useEffect(() => {
@@ -49,7 +56,7 @@ export const Movies = () => {
     setQuery(queryString);
     setSearchParams({ query: queryString });
 
-    e.target.reset();
+    setQueryString('');
   };
 
   return (
@@ -63,7 +70,6 @@ export const Movies = () => {
                 name="query"
                 value={queryString}
                 autoComplete="off"
-                autoFocus
                 placeholder=" "
                 onChange={handleChange}
               />
@@ -79,3 +85,5 @@ export const Movies = () => {
     </main>
   );
 };
+
+export default Movies;

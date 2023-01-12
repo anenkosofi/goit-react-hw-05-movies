@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Outlet, useLocation, useParams } from 'react-router-dom';
 import { IoIosPeople, IoIosPaper, IoIosArrowDropleft } from 'react-icons/io';
 import { getMovieById } from 'services/movieApi';
@@ -14,7 +14,7 @@ import {
 } from './MovieDetails.styled';
 import defaultPicture from '../../images/default-movie.jpg';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const location = useLocation();
@@ -85,9 +85,15 @@ export const MovieDetails = () => {
               </li>
             </ul>
           </AdditionalInfo>
-          <Outlet />
+          <Suspense
+            fallback={<div>Please wait while minions do their work...</div>}
+          >
+            <Outlet />
+          </Suspense>
         </Container>
       </Section>
     </main>
   );
 };
+
+export default MovieDetails;

@@ -9,7 +9,7 @@ const Blockquote = styled.blockquote`
   text-align: center;
 
   p {
-    margin-bottom: 16px;
+    margin-top: 16px;
   }
 
   svg {

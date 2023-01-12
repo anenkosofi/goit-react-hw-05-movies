@@ -4,7 +4,7 @@ import { FaQuoteLeft } from 'react-icons/fa';
 import { getMovieReviews } from 'services/movieApi';
 import { Blockquote } from './Reviews.styled';
 
-export const Reviews = () => {
+const Reviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState(null);
 
@@ -21,11 +21,11 @@ export const Reviews = () => {
         reviews.map(({ id, author, content, url }) => (
           <li key={id}>
             <Blockquote cite={url}>
+              <cite>Author: {author}</cite>
               <p>
                 <FaQuoteLeft size={24} />
                 {content}
               </p>
-              <cite>Author: {author}</cite>
             </Blockquote>
           </li>
         ))
@@ -35,3 +35,5 @@ export const Reviews = () => {
     </ul>
   );
 };
+
+export default Reviews;

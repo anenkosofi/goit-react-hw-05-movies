@@ -4,7 +4,7 @@ import { getMovieCast } from 'services/movieApi';
 import { List, Character } from './Cast.styled';
 import defaultPicture from '../../images/default-profile-icon.jpg';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState(null);
 
@@ -38,3 +38,5 @@ export const Cast = () => {
     </List>
   );
 };
+
+export default Cast;

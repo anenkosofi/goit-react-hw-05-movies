@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useLocation } from 'react-router-dom';
 import { List, ListItem, Item, Poster, MovieInfo } from './MovieList.styled';
 import defaultPicture from '../../images/default-movie.jpg';
@@ -26,4 +27,17 @@ export const MovieList = ({ items }) => {
       ))}
     </List>
   );
+};
+
+MovieList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      poster_path: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.oneOf([null]).isRequired,
+      ]),
+      title: PropTypes.string.isRequired,
+    })
+  ),
 };

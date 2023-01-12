@@ -43,18 +43,20 @@ const Movies = () => {
 
   const handleChange = e => {
     const { value } = e.currentTarget;
-    setQueryString(value.trim().toLowerCase());
+    setQueryString(value);
   };
 
   const submitHandler = e => {
     e.preventDefault();
 
-    if (!queryString) {
+    const searchQuery = queryString.trim().toLowerCase();
+
+    if (!searchQuery) {
       alert('Search box cannot be empty. Please enter the word.');
       return;
     }
-    setQuery(queryString);
-    setSearchParams({ query: queryString });
+    setQuery(searchQuery);
+    setSearchParams({ query: searchQuery });
 
     setQueryString('');
   };

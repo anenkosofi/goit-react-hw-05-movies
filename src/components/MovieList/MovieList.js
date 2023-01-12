@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { List, ListItem, Item, Poster, MovieInfo } from './MovieList.styled';
+import defaultPicture from '../../images/default-movie.jpg';
 
 export const MovieList = ({ items }) => {
   const location = useLocation();
@@ -10,7 +11,11 @@ export const MovieList = ({ items }) => {
         <ListItem key={id}>
           <Item to={`/movies/${id}`} state={{ from: location }}>
             <Poster
-              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+              src={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                  : defaultPicture
+              }
               alt={title}
             />
             <MovieInfo>

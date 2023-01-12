@@ -17,17 +17,21 @@ export const Reviews = () => {
   }
   return (
     <ul>
-      {reviews.map(({ id, author, content, url }) => (
-        <li key={id}>
-          <Blockquote cite={url}>
-            <p>
-              <FaQuoteLeft size={24} />
-              {content}
-            </p>
-            <cite>Author: {author}</cite>
-          </Blockquote>
-        </li>
-      ))}
+      {reviews.length !== 0 ? (
+        reviews.map(({ id, author, content, url }) => (
+          <li key={id}>
+            <Blockquote cite={url}>
+              <p>
+                <FaQuoteLeft size={24} />
+                {content}
+              </p>
+              <cite>Author: {author}</cite>
+            </Blockquote>
+          </li>
+        ))
+      ) : (
+        <p>We do not have any reviews for this movie.</p>
+      )}
     </ul>
   );
 };

@@ -12,6 +12,7 @@ import {
   AdditionalInfo,
   NavItem,
 } from './MovieDetails.styled';
+import defaultPicture from '../../images/default-movie.jpg';
 
 export const MovieDetails = () => {
   const { movieId } = useParams();
@@ -28,7 +29,9 @@ export const MovieDetails = () => {
 
   const { genres, overview, poster_path, release_date, title, vote_average } =
     movie;
-  const backLinkHref = location.state?.from ?? '/movies';
+
+  const backLinkHref = location.state?.from ?? '/';
+
   return (
     <main>
       <Section>
@@ -39,7 +42,11 @@ export const MovieDetails = () => {
           </NavItem>
           <MovieWrapper>
             <img
-              src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+              src={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                  : defaultPicture
+              }
               alt={title}
             />
             <div>
@@ -65,13 +72,13 @@ export const MovieDetails = () => {
             <h2>Additional information</h2>
             <ul>
               <li>
-                <NavItem to="cast">
+                <NavItem to="cast" state={{ from: backLinkHref }}>
                   <IoIosPeople size={24} />
                   <span>Cast</span>
                 </NavItem>
               </li>
               <li>
-                <NavItem to="reviews">
+                <NavItem to="reviews" state={{ from: backLinkHref }}>
                   <IoIosPaper size={24} />
                   <span>Reviews</span>
                 </NavItem>

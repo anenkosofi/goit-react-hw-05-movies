@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { FaQuoteLeft } from 'react-icons/fa';
 import { getMovieReviews } from 'services/movieApi';
+import { Blockquote } from './Reviews.styled';
 
 export const Reviews = () => {
   const { movieId } = useParams();
@@ -15,10 +17,15 @@ export const Reviews = () => {
   }
   return (
     <ul>
-      {reviews.map(({ id, author, content }) => (
+      {reviews.map(({ id, author, content, url }) => (
         <li key={id}>
-          <p>Author: {author}</p>
-          <p>{content}</p>
+          <Blockquote cite={url}>
+            <p>
+              <FaQuoteLeft size={24} />
+              {content}
+            </p>
+            <cite>Author: {author}</cite>
+          </Blockquote>
         </li>
       ))}
     </ul>

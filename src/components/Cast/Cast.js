@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieCast } from 'services/movieApi';
+import { List, Character } from './Cast.styled';
 
 export const Cast = () => {
   const { movieId } = useParams();
@@ -14,7 +15,7 @@ export const Cast = () => {
     return null;
   }
   return (
-    <ul>
+    <List>
       {cast.map(({ id, character, name, profile_path }) => (
         <li key={id}>
           <img
@@ -22,9 +23,9 @@ export const Cast = () => {
             alt={name}
           />
           <p>{name}</p>
-          <p>Character: {character}</p>
+          <Character>Character: {character}</Character>
         </li>
       ))}
-    </ul>
+    </List>
   );
 };

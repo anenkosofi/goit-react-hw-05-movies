@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import { TbHome, TbMovie } from 'react-icons/tb';
-import { WrapperBox, Box, Navigation, NavItem } from './SharedLayout.styled';
+import { Appbar, Container, Navigation, NavItem } from './SharedLayout.styled';
 
 export const SharedLayout = () => {
   return (
-    <WrapperBox>
-      <header>
-        <Box>
+    <>
+      <Appbar>
+        <Container>
           <Navigation>
             <NavItem to="/">
               <TbHome size={24} />
@@ -17,9 +17,9 @@ export const SharedLayout = () => {
               <span>Movies</span>
             </NavItem>
           </Navigation>
-        </Box>
-      </header>
+        </Container>
+      </Appbar>
       <Outlet />
-    </WrapperBox>
+    </>
   );
 };

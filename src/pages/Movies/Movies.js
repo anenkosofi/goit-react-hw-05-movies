@@ -1,10 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { BsSearch } from 'react-icons/bs';
 import { getMovieByQuery } from 'services/movieApi';
 import { MovieList } from 'components/MovieList';
+import {
+  Section,
+  Container,
+  Form,
+  Field,
+  Label,
+  Input,
+  Button,
+} from './Movies.styled';
 
 export const Movies = () => {
   const [query, setQuery] = useState('');
+  const [queryString, setQueryString] = useState('');
   const [movies, setMovies] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const queryParam = searchParams.get('query');
 
   useEffect(() => {
     if (!query) {
@@ -13,32 +27,55 @@ export const Movies = () => {
     getMovieByQuery(query).then(({ results }) => setMovies(results));
   }, [query]);
 
+  useEffect(() => {
+    if (!queryParam) {
+      return;
+    }
+    getMovieByQuery(queryParam).then(({ results }) => setMovies(results));
+  }, [queryParam]);
+
+  const handleChange = e => {
+    const { value } = e.currentTarget;
+    setQueryString(value.trim().toLowerCase());
+  };
+
   const submitHandler = e => {
     e.preventDefault();
-    const searchQuery = e.target.elements.query.value.trim().toLowerCase();
 
-    if (!searchQuery) {
+    if (!queryString) {
       alert('Search box cannot be empty. Please enter the word.');
       return;
     }
-    setQuery(searchQuery);
+    setQuery(queryString);
+    setSearchParams({ query: queryString });
 
     e.target.reset();
   };
 
   return (
-    <div>
-      <form onSubmit={submitHandler}>
-        <input
-          type="text"
-          name="query"
-          autoComplete="off"
-          autoFocus
-          placeholder="Search movies"
-        />
-        <button type="submit">Search</button>
-      </form>
-      {movies.length > 0 && <MovieList items={movies} />}
-    </div>
+    <main>
+      <Section>
+        <Container>
+          <Form onSubmit={submitHandler}>
+            <Field>
+              <Input
+                type="text"
+                name="query"
+                value={queryString}
+                autoComplete="off"
+                autoFocus
+                placeholder=" "
+                onChange={handleChange}
+              />
+              <Label>Search movies</Label>
+            </Field>
+            <Button type="submit">
+              <BsSearch size={24} />
+            </Button>
+          </Form>
+          {movies.length > 0 && <MovieList items={movies} />}
+        </Container>
+      </Section>
+    </main>
   );
 };

@@ -53,7 +53,7 @@ const MovieDetails = () => {
               <Title>
                 {title} ({new Date(release_date).getFullYear()})
               </Title>
-              <p>Use Score: {Math.round(vote_average * 10)}%</p>
+              <p>User Score: {Math.round(vote_average * 10)}%</p>
               <p>
                 <b>Overview</b>
               </p>

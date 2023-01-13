@@ -20,9 +20,7 @@ export const SharedLayout = () => {
           </Navigation>
         </Container>
       </Appbar>
-      <Suspense
-        fallback={<div>Please wait while minions do their work...</div>}
-      >
+      <Suspense fallback={null}>
         <Outlet />
       </Suspense>
     </>

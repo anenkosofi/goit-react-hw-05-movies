@@ -50,13 +50,6 @@ const MovieDetails = () => {
       });
   }, [movieId]);
 
-  if (!movie) {
-    return null;
-  }
-
-  const { genres, overview, poster_path, release_date, title, vote_average } =
-    movie;
-
   const backLinkHref = location.state?.from ?? '/';
 
   return (
@@ -74,26 +67,26 @@ const MovieDetails = () => {
               <MovieWrapper>
                 <img
                   src={
-                    poster_path
-                      ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                    movie.poster_path
+                      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
                       : defaultPicture
                   }
-                  alt={title}
+                  alt={movie.title}
                 />
                 <div>
                   <Title>
-                    {title} ({new Date(release_date).getFullYear()})
+                    {movie.title} ({new Date(movie.release_date).getFullYear()})
                   </Title>
-                  <p>User Score: {Math.round(vote_average * 10)}%</p>
+                  <p>User Score: {Math.round(movie.vote_average * 10)}%</p>
                   <p>
                     <b>Overview</b>
                   </p>
-                  <p>{overview}</p>
+                  <p>{movie.overview}</p>
                   <p>
                     <b>Genres</b>
                   </p>
                   <GenreWrapper>
-                    {genres.map(({ name }) => (
+                    {movie.genres.map(({ name }) => (
                       <Genre key={name}>{name}</Genre>
                     ))}
                   </GenreWrapper>
